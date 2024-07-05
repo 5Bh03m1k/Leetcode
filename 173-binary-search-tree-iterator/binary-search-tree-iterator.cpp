@@ -11,13 +11,13 @@
  */
 class BSTIterator {
 public:
-    queue<int> tree;
+    queue<TreeNode*> tree;
     void f(TreeNode* root)
     {
         if(root==nullptr)
             return;
         f(root->left);
-        tree.push(root->val);
+        tree.push(root);
         f(root->right);
         return;
     }
@@ -26,9 +26,9 @@ public:
     }
     
     int next() {
-        int n=tree.front();
+        TreeNode* n=tree.front();
         tree.pop();
-        return n;
+        return n->val;
     }
     
     bool hasNext() {
