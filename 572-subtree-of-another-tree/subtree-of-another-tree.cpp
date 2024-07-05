@@ -13,18 +13,14 @@ class Solution {
 public:
     bool chk(TreeNode* a, TreeNode* b)
     {
-        if(a==nullptr && b==nullptr)
+        if(a==nullptr and b==nullptr)
             return true;
         if(a==nullptr ^ b==nullptr)
             return false;
         if(a->val!=b->val)
             return false;
-        
-        bool k= chk(a->left,b->left),l=chk(a->right,b->right);
-        cout<<1;
-        return k&&l;
+        return chk(a->left,b->left)&&chk(a->right,b->right);
     }
-    bool ret=true;
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         if(root == nullptr)
             return false;
