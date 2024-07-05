@@ -11,13 +11,13 @@
  */
 class BSTIterator {
 public:
-    deque<int> tree;
+    queue<int> tree;
     void f(TreeNode* root)
     {
         if(root==nullptr)
             return;
         f(root->left);
-        tree.push_back(root->val);
+        tree.push(root->val);
         f(root->right);
         return;
     }
@@ -27,7 +27,7 @@ public:
     
     int next() {
         int n=tree.front();
-        tree.pop_front();
+        tree.pop();
         return n;
     }
     
