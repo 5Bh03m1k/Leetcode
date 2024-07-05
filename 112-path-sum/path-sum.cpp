@@ -13,6 +13,9 @@ class Solution {
 public:
     bool fn(TreeNode* root,int n,int t)
     {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         if(root==nullptr)
             return false;
         n+=root->val;
@@ -20,6 +23,7 @@ public:
         {
             if(n==t)
                 return true;
+            return false;
         }
         return fn(root->right,n,t)||fn(root->left,n,t);
     }
