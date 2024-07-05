@@ -16,10 +16,10 @@ public:
         ios_base::sync_with_stdio(false);
         cin.tie(nullptr);
         cout.tie(nullptr);
-        if(root==nullptr)
+        if(!root)
             return false;
         n+=root->val;
-        if(root->left == nullptr && root->right == nullptr)
+        if(!root->left && !root->right)
         {
             if(n==t)
                 return true;
