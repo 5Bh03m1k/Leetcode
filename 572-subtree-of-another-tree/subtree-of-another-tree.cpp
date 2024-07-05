@@ -19,7 +19,9 @@ public:
             return false;
         if(a->val!=b->val)
             return false;
-        return chk(a->left,b->left)&&chk(a->right,b->right);
+        if(!chk(a->left,b->left))
+            return false;
+        return chk(a->right,b->right);
     }
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         if(root == nullptr)
