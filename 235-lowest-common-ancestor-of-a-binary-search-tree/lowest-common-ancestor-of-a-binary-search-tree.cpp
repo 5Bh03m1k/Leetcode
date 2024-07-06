@@ -16,6 +16,8 @@ int speed_up = []{
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(p==root || q==root)
+            return root;
         if(p->val>root->val && q->val>root->val)
             return lowestCommonAncestor(root->right,p,q);
         if(p->val<root->val && q->val<root->val)
