@@ -13,10 +13,11 @@ class Solution {
 public:
     int maxi=-1;
     vector<int>a={};
-    vector<vector<int>> fn(vector<vector<int>>arr,TreeNode* root,int i=-1)
+   vector<vector<int>> arr;
+    void fn(TreeNode* root,int i=-1)
     {
         if(root == nullptr)
-            return arr;
+            return;
         i+=1;
         if(i>maxi)
         {
@@ -24,16 +25,16 @@ public:
             arr.push_back(a);
         }
         arr[i].push_back(root->val);
-        cout<<root->val;
-        arr=fn(arr,root->left,i);
-        arr=fn(arr,root->right,i);
-        return arr;
+        fn(root->left,i);
+        fn(root->right,i);
+        return;
     }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> arr;
+        
         if(root == nullptr)
             return arr;
-        arr=fn(arr, root);
+        fn( root);
         return arr;
+    
     }
 };
