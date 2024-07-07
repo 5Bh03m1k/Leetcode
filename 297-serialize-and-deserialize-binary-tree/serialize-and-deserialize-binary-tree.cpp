@@ -7,56 +7,47 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Codec {
+class Codec {//using DFS//
 public:
-////////////////////////////////////////////coding////////////////////////////////////////////
-// Encodes a tree to a single string.
-    string a="";
-    queue<TreeNode*> q;
-    void fn(int n)
+
+    // Encodes a tree to a single string.
+    void fn(TreeNode* root , string &a)
     {
-        if(n==0)
-            return;
-        TreeNode* root;
-        for(int i=0 ; i<n ; i++)
+        if(root==nullptr)
         {
-            root=q.front();
-            q.pop();
-            if(root == nullptr)
-            {
-                a.append("1010 ");
-            }
-            else
-            {
-                a.append(to_string(root->val)+' ');
-                q.push(root->left);
-                q.push(root->right);
-            }
+            a.append("1010 ");
+            return;
         }
-        fn(q.size());
-    }
+        a.append(to_string(root->val)+' ');
+        fn(root->left,a);
+        fn(root->right,a);
+    }//performs DFS;
     string serialize(TreeNode* root) {
+        string a;
         if(root == nullptr)
             return a;
-        q.push(root);
-        fn(1);
+        fn(root,a);
+        cout<<a;
         return a;
+        
     }
-////////////////////////////////////////////////////////////////////////////////////////////////
-///////using level order search to encode and decode !!! should try others//////////////////////
-/////////////////////////////////////////////////decoding///////////////////////////////////////
+
     // Decodes your encoded data to tree.
+    //////////////////get string//////////////
     int index=0;
     string s;
     int stl()
     {
+        if(index >= s.size())
+            return INT_MIN;
         string a="";
         while(s[index]!= ' ')
                 a=a+s[index],index++;
         index++;
             return(stoi(a));
-    }//string to array of integer
-        /////////////////////////create to treeNode/////////////////////
+    }
+    ////////////////////////////////////////////
+    //////////////////////create node//////////////////
     TreeNode* create(int n)
     {
         TreeNode* itr = new TreeNode;
@@ -65,39 +56,32 @@ public:
         itr->right=nullptr;
         return itr;
     }
-        ///////////////////////queue to tree/////////////
-    void crt(int n)
+    //////////////////////////////////////////////////
+    void func(TreeNode* root)
     {
-        if(n==0)
-            return;
-        for(int itr=0 ; itr<n ; itr++)
-        {
-            TreeNode* root=q.front();
-            q.pop();
-            int a=stl();
-            if(a != 1010)                ///flag INT_MIN
-            {
-                TreeNode* le=create(a);
-                root->left = le;
-                q.push(root->left);
-            }
-            a=stl();
-            if(a!= 1010)                     ////flagINT_MIN
-            {
-                TreeNode* le=create(a);
-                root->right = le;
-                q.push(root->right);
-            }
+        int a=stl();
+        if(a == INT_MIN)
+            return ;
+        if(a != 1010){
+            root->left=create(a);
+            func(root->left);
         }
-        return crt(q.size());
+            a=stl();
+            if(a == INT_MIN)
+                 return ;
+            if(a != 1010){
+            root->right=create(a);
+            func(root->right);
+            }
+                return;
     }
+    /////////////////////////////////////////////////
     TreeNode* deserialize(string data) {
-        if(data.size()==0)
+        if(data.size() == 0)
             return nullptr;
-            s=data;
-        TreeNode* root=create(stl());
-        q.push(root);
-        crt(1);
+        s=data;
+        TreeNode* root = create(stl());
+        func(root);
         return root;
     }
 };
