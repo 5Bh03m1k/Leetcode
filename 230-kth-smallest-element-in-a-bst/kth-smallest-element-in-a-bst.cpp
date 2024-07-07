@@ -11,24 +11,19 @@
  */
 class Solution {
 public:
-    int itr,val;
+    vector<int> arr;
     void fn(TreeNode* root)
     {
         if(root == nullptr)
             return;
         fn(root->left);
-        if(itr==0)
-            return;
-        itr--;
-        if(itr == 0)
-            val=root->val;
+       arr.push_back(root->val);
         fn(root->right);
     }
     int kthSmallest(TreeNode* root, int k) {
         if(root == nullptr)
             return 0;
-            itr=k;
         fn(root);
-        return val;
+        return arr[k-1];
     }
 };
