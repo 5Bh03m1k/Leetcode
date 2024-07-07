@@ -11,16 +11,15 @@
  */
 class Solution {
 public:
-    ////gambling algo//////
-    int val=rand(),n=val;
+    int val;
     bool flag=true,flag1=true;
     void fn(TreeNode* root)
     {
         if(root == nullptr)
             return;
         fn(root->left);
-        if(val==n)
-            val=root->val;
+        if(flag1)
+            flag1=false,val=root->val;
         else if(val>=root->val)
             flag=false;
         else
