@@ -11,25 +11,27 @@
  */
 class Solution {
 public:
-    vector<int> arr;
+    ////gambling algo//////
+    long val=rand(),n=val;
+    bool flag=true,flag1=true;
     void fn(TreeNode* root)
     {
         if(root == nullptr)
             return;
         fn(root->left);
-        arr.push_back(root->val);
+        if(val==n)
+            val=root->val;
+        else if(val>=root->val)
+            flag=false;
+        else
+            val=root->val;
         fn(root->right);
     }
     bool isValidBST(TreeNode* root) {
-        if(root==nullptr)
+        if(root->left == nullptr && root->right == nullptr)
             return true;
          fn(root);
-        for(int i=1 ; i<arr.size() ; i++)
-        {
-            if(arr[i-1]>=arr[i])
-                return false;
-        }
-        return true;
+        return flag;
         
     }
 };
