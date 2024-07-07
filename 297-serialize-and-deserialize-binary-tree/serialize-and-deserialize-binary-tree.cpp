@@ -11,7 +11,7 @@ class Codec {
 public:
 ////////////////////////////////////////////coding////////////////////////////////////////////
 // Encodes a tree to a single string.
-    string a;
+    string a="";
     queue<TreeNode*> q;
     void fn(int n)
     {
@@ -23,14 +23,14 @@ public:
             root=q.front();
             q.pop();
             if(root == nullptr)
-               a.append("1010 ");
-            
+            {
+                a.append("1010 ");
+            }
             else
             {
                 a.append(to_string(root->val)+' ');
                 q.push(root->left);
                 q.push(root->right);
-                
             }
         }
         fn(q.size());
@@ -53,11 +53,18 @@ public:
         string a="";
         while(s[index]!= ' ')
                 a=a+s[index],index++;
-        index++;     ////using intmin as indicator of null should be corrected
-        
+        index++;
             return(stoi(a));
     }//string to array of integer
         /////////////////////////create to treeNode/////////////////////
+    TreeNode* create(int n)
+    {
+        TreeNode* itr = new TreeNode;
+        itr->val=n;
+        itr->left=nullptr;
+        itr->right=nullptr;
+        return itr;
+    }
         ///////////////////////queue to tree/////////////
     void crt(int n)
     {
@@ -68,23 +75,17 @@ public:
             TreeNode* root=q.front();
             q.pop();
             int a=stl();
-            if(a != 1010)                ///flag 1010
+            if(a != 1010)                ///flag INT_MIN
             {
-                TreeNode* left =new TreeNode;
-                left->left=nullptr;
-                left->right=nullptr;
-                left->val=a;
-                root->left = left;
+                TreeNode* le=create(a);
+                root->left = le;
                 q.push(root->left);
             }
             a=stl();
-            if(a!= 1010)                     ////flag 1010
+            if(a!= 1010)                     ////flagINT_MIN
             {
-                TreeNode* left =new TreeNode ;
-                left->left=nullptr;
-                left->right=nullptr;
-                left->val=a;
-                root->right = left;
+                TreeNode* le=create(a);
+                root->right = le;
                 q.push(root->right);
             }
         }
@@ -94,10 +95,7 @@ public:
         if(data.size()==0)
             return nullptr;
             s=data;
-        TreeNode* root=new TreeNode ;
-        root->val=stl();
-        root->left=nullptr;
-        root->right=nullptr;
+        TreeNode* root=create(stl());
         q.push(root);
         crt(1);
         return root;
