@@ -11,29 +11,32 @@
  */
 class Solution {
 public:
-    int maxi=-1;
-    vector<int>a={};
    vector<vector<int>> arr;
-    void fn(TreeNode* root,int i=-1)
+   queue<TreeNode*> q;
+    void fn(int n,int level=0)
     {
-        if(root == nullptr)
+        if(n==0)
             return;
-        i+=1;
-        if(i>maxi)
+        arr.push_back({});
+        TreeNode* root;
+        for(int i=0 ; i<n ; i++)
         {
-            maxi=i;
-            arr.push_back(a);
+            root=q.front();
+            arr[level].push_back(root->val);
+            q.pop();
+            if(root->left != nullptr)   q.push(root->left);
+            if(root->right != nullptr)  q.push(root->right);
+
         }
-        arr[i].push_back(root->val);
-        fn(root->left,i);
-        fn(root->right,i);
+        fn(q.size(),++level);
         return;
     }
     vector<vector<int>> levelOrder(TreeNode* root) {
         
         if(root == nullptr)
             return arr;
-        fn( root);
+        q.push(root);
+        fn(1);
         return arr;
     
     }
