@@ -13,11 +13,14 @@ class Solution {
 public:
    vector<vector<int>> arr;
    queue<TreeNode*> q;
-    void fn(int n,int level=0)
+    void fn(int n,int level=0,int m=-1)
     {
         if(n==0)
             return;
-        arr.push_back({});
+        if(m<level){
+            m=level;
+            arr.push_back({});
+        }
         TreeNode* root;
         for(int i=0 ; i<n ; i++)
         {
