@@ -13,6 +13,9 @@ class Solution {
 public:
     int goodNodes(TreeNode* root,int max=INT_MIN) 
     {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int res=0;
         if(root == nullptr)
             return 0;
