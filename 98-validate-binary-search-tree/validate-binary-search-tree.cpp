@@ -12,7 +12,7 @@
 class Solution {
 public:
     ////gambling algo//////
-    long val=rand(),n=val;
+    int val=rand(),n=val;
     bool flag=true,flag1=true;
     void fn(TreeNode* root)
     {
