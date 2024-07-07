@@ -11,33 +11,29 @@
  */
 class Solution {
 public:
-    vector<double> ans;
-    vector<int> n;
-    int max=-1;
-    void fn(TreeNode* root ,int i=0)
+     vector<double> arr;
+     queue<TreeNode*> q;
+    void fn(int n,int j=0)
     {
-        if(root == nullptr)
+        if(n == 0)
             return;
-        if(i>max)
+        arr.push_back(0);
+        for(int i=0 ; i<n ; i++)
         {
-            max=i;
-            ans.push_back(root->val);
-            n.push_back(1);
+            if(q.front()->left != nullptr) q.push(q.front()->left);
+            if(q.front()->right != nullptr) q.push(q.front()->right);
+            arr[j]+=q.front()->val;
+            q.pop();
         }
-        else
-        {
-            ans[i]+=root->val;
-            n[i]++;
-        }
-        fn(root->left,i+1);
-        fn(root->right,i+1);
+        arr[j]/=n;
+        fn(q.size(),++j);
     }
     vector<double> averageOfLevels(TreeNode* root) {
-        if(root==nullptr)   return ans;
-        fn(root);
-        for(int i=0;i<=max;i++)
-            ans[i]/=n[i];
-        
-        return ans;
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        if(root==nullptr)   return arr;
+        q.push(root);
+        fn(1);
+        return arr;
     }
 };
