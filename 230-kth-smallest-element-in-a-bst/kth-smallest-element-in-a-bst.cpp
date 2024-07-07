@@ -17,6 +17,8 @@ public:
         if(root == nullptr)
             return;
         fn(root->left);
+        if(itr==0)
+            return;
         itr--;
         if(itr == 0)
             val=root->val;
