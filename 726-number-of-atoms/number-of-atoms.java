@@ -1,129 +1,43 @@
 class Solution {
+      public String countOfAtoms(String formula) {
+        Stack<Map<String, Integer>> stack = new Stack<>();
+        stack.push(new HashMap<>());
+        int len = formula.length();
 
-    // Global variable
-    int index = 0;
-
-    public String countOfAtoms(String formula) {
-        // Recursively parse the formula
-        Map<String, Integer> finalMap = parseFormula(formula);
-
-        // Sort the final map
-        TreeMap<String, Integer> sortedMap = new TreeMap<>(finalMap);
-
-        // Generate the answer string
-        StringBuilder ans = new StringBuilder();
-        for (String atom : sortedMap.keySet()) {
-            ans.append(atom);
-            if (sortedMap.get(atom) > 1) {
-                ans.append(sortedMap.get(atom));
-            }
-        }
-
-        return ans.toString();
-    }
-
-    // Recursively parse the formula
-    private Map<String, Integer> parseFormula(String formula) {
-        // Local variable
-        Map<String, Integer> currMap = new HashMap<>();
-        String currAtom = new String();
-        String currCount = new String();
-
-        // Iterate until the end of the formula
-        while (index < formula.length()) {
-            // UPPERCASE LETTER
-            if (Character.isUpperCase(formula.charAt(index))) {
-                if (!currAtom.isEmpty()) {
-                    if (currCount.isEmpty()) {
-                        currMap.put(
-                            currAtom,
-                            currMap.getOrDefault(currAtom, 0) + 1
-                        );
-                    } else {
-                        currMap.put(
-                            currAtom,
-                            currMap.getOrDefault(currAtom, 0) +
-                            Integer.parseInt(currCount)
-                        );
-                    }
+        for (int i = 0; i < len; ) {
+            if (formula.charAt(i) == '(') {
+                stack.push(new HashMap<>());
+                i++;
+            } else if (formula.charAt(i) == ')') {
+                Map<String, Integer> top = stack.pop();
+                i++;
+                int start = i;
+                while (i < len && Character.isDigit(formula.charAt(i))) i++;
+                int multiplier = start < i ? Integer.parseInt(formula.substring(start, i)) : 1;
+                for (String key : top.keySet()) {
+                    stack.peek().put(key, stack.peek().getOrDefault(key, 0) + top.get(key) * multiplier);
                 }
-
-                currAtom = String.valueOf(formula.charAt(index));
-                currCount = "";
-                index++;
-            }
-            // lowercase letter
-            else if (Character.isLowerCase(formula.charAt(index))) {
-                currAtom += formula.charAt(index);
-                index++;
-            }
-            // Digit. Concatenate the count
-            else if (Character.isDigit(formula.charAt(index))) {
-                currCount += formula.charAt(index);
-                index++;
-            }
-            // Left Parenthesis
-            else if (formula.charAt(index) == '(') {
-                index++;
-                Map<String, Integer> nestedMap = parseFormula(formula);
-                for (String atom : nestedMap.keySet()) {
-                    currMap.put(
-                        atom,
-                        currMap.getOrDefault(atom, 0) + nestedMap.get(atom)
-                    );
-                }
-            }
-            // Right Parenthesis
-            else if (formula.charAt(index) == ')') {
-                // Save the last atom and count of nested formula
-                if (!currAtom.isEmpty()) {
-                    if (currCount.isEmpty()) {
-                        currMap.put(
-                            currAtom,
-                            currMap.getOrDefault(currAtom, 0) + 1
-                        );
-                    } else {
-                        currMap.put(
-                            currAtom,
-                            currMap.getOrDefault(currAtom, 0) +
-                            Integer.parseInt(currCount)
-                        );
-                    }
-                }
-
-                index++;
-                StringBuilder multiplier = new StringBuilder();
-                while (
-                    index < formula.length() &&
-                    Character.isDigit(formula.charAt(index))
-                ) {
-                    multiplier.append(formula.charAt(index));
-                    index++;
-                }
-                if (multiplier.length() > 0) {
-                    int mult = Integer.parseInt(multiplier.toString());
-                    for (String atom : currMap.keySet()) {
-                        currMap.put(atom, currMap.get(atom) * mult);
-                    }
-                }
-
-                return currMap;
-            }
-        }
-
-        // Save the last atom and count
-        if (!currAtom.isEmpty()) {
-            if (currCount.isEmpty()) {
-                currMap.put(currAtom, currMap.getOrDefault(currAtom, 0) + 1);
             } else {
-                currMap.put(
-                    currAtom,
-                    currMap.getOrDefault(currAtom, 0) +
-                    Integer.parseInt(currCount)
-                );
+                int start = i;
+                i++;
+                while (i < len && Character.isLowerCase(formula.charAt(i))) i++;
+                String element = formula.substring(start, i);
+                start = i;
+                while (i < len && Character.isDigit(formula.charAt(i))) i++;
+                int count = start < i ? Integer.parseInt(formula.substring(start, i)) : 1;
+                stack.peek().put(element, stack.peek().getOrDefault(element, 0) + count);
             }
         }
 
-        return currMap;
+        Map<String, Integer> result = stack.pop();
+        List<String> elements = new ArrayList<>(result.keySet());
+        Collections.sort(elements);
+        StringBuilder sb = new StringBuilder();
+        for (String element : elements) {
+            sb.append(element);
+            int count = result.get(element);
+            if (count > 1) sb.append(count);
+        }
+        return sb.toString();
     }
 }
