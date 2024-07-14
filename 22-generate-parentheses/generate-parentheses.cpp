@@ -1,26 +1,21 @@
 class Solution {
 public:
-    vector<string> s;
+    vector<string> ans;
     
-    void fn(int n ,string st={}, int open = 0 , int close  = 0)
-    {
-        if(st.size() == n*2){  
-            s.push_back(st);  
-            return ;
+    void fn(int l, int r, string s="") {
+        if (l == 0 && r == 0) {
+            ans.push_back(s);
+            return;
         }
-
-        if( open < n)   st.append("(") , open++;
-
-        else return;
-        
-        for(close ; close <= open ; close++)
-        {
-            fn(n, st , open , close);
-            st.append(")");
+        if (l > 0) {
+            fn(l-1, r, s + "(");
+        }
+        if (r > l) {
+            fn(l, r-1, s+")");
         }
     }
     vector<string> generateParenthesis(int n) {
-        fn(n);
-       return s;
+        fn(n,n);
+       return ans;
     }
 };
