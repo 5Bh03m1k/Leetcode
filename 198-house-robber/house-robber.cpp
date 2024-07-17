@@ -18,7 +18,7 @@ public:
     int rob(vector<int>& nums) {
         house=nums;
         int n=nums.size(),max=INT_MIN;
-        for(int i=0 ; i<n ; i++)    dp[i]=-1;
+        for(int i=0 ; i<100 ; i++)    dp[i]=-1;
         for(int i=0 ; i<n ; i++){
            int a=fn(i,n); 
            cout<<a<<"\n";
