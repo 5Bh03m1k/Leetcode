@@ -1,18 +1,13 @@
 class Solution {
 public:
-    int array[1001];
-    int max_cost(int n,vector<int> &arr)
-    {
-        if(n<0) return 0;
-        if(array[n] !=  -1) return array[n];
-        array[n] = arr[n]+min(max_cost(n-1,arr),max_cost(n-2,arr));
-        return array[n];
+    int dp[1001];
+    int help(int i,vector<int>& cost){
+        if(i>=cost.size()) return 0;
+        if(dp[i]!=-1) return dp[i];
+        return dp[i]=cost[i]+min(help(i+1,cost),help(i+2,cost));
     }
     int minCostClimbingStairs(vector<int>& cost) {
-        cost.push_back(0);
-        int n=cost.size();
-        for(int i=0 ; i<n; i++)    array[i]=-1;
-       return max_cost(n-1,cost);
-        // return  a;
+        for(int i=0;i<1001;i++) dp[i]=-1;
+        return min(help(0,cost),help(1,cost));
     }
 };
