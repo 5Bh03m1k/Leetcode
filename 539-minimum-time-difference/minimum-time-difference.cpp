@@ -11,7 +11,7 @@ public:
         int n = time.size();
         int mini = time[0] + 24*60 - time[n-1];
         for(int i = 0;i<n-1;i++){
-            mini = min(mini,min(time[i+1]-time[i],24*60 - time[i+1] + time[i]));
+            mini = min(mini,time[i+1]-time[i]);
         }
         return mini;
     }
