@@ -1,12 +1,12 @@
 class Solution {
 public:
     vector<int> curr;
-    unordered_map<int,int> table;
+    int table[10002]={0};
     int fn(int r)
     {
-        if(table.find(r)!=table.end())  return table[r];
         if(r==0)    return 0;
         if(r<0)     return -1;
+        if(table[r]!= 0)  return table[r];
         int sum=0,min=INT_MAX,itr;
         for(int i=0 ; i<curr.size() ; i++)
             sum=(fn(r-curr[i])),min = sum>=0?(min>sum?sum:min):min;
