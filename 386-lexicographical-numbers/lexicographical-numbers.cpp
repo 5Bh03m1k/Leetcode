@@ -6,6 +6,7 @@ public:
         if(num < x) return;
         a.push_back(x);
         x*=10;
+        if(num < x) return;
         for(int i=0 ; i<10 ; i++)
             fn(x+i,a);
 
