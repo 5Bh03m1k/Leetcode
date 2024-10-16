@@ -9,14 +9,16 @@ public:
     void addNum(int num) {
         if( d.size() == 0 && u.size() == 0 && (a.size() == 0 || a.size() == 1))
         {  
-            a.push_back(num);
-            if(a.size() == 2)
+             switch(a.size())
             {
-                d.push(min(a[0],a[1]));
-                u.push(max(a[0],a[1]));
-                a.clear();
+                case 0:{a.push_back(num);  return;}
+                default : {
+                                d.push(min(a[0],num));
+                                u.push(max(a[0],num));
+                                a.clear();
+                                return;
+                            }
             }
-            return;
         }
 
         int n;
@@ -26,14 +28,15 @@ public:
             d.push(num),n=d.top(),d.pop();
         else    n = num;
 
-
-        if(a.size() == 0) {  a.push_back(n);  return;}
-        if(a.size() == 1)
+        switch(a.size())
         {
-            d.push(min(a[0],n));
-            u.push(max(a[0],n));
-            a.clear();
-            return;
+            case 0:{a.push_back(n);  return;}
+            default : {
+                            d.push(min(a[0],n));
+                            u.push(max(a[0],n));
+                            a.clear();
+                            return;
+                        }
         }
 
     }
