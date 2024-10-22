@@ -11,18 +11,19 @@
  */
 class Solution {
 public:
-    void fn(int k)
-    {
-        long long n = q.size() , sum = 0;
-        if(n == 0)
-            return;
-        for( int i=0 ; i < n ; i++ )
+    
+    long long kthLargestLevelSum(TreeNode* root, int k) {
+        q.push(root);
+        while(!q.empty())
         {
-            sum += q.front() -> val;
-            if(q.front() -> left != nullptr) q.push(q.front() -> left);
-            if(q.front() -> right != nullptr) q.push(q.front() -> right);
-            q.pop();
-        }
+            long long n = q.size() , sum = 0;
+            for( int i=0 ; i < n ; i++ )
+            {
+                sum += q.front() -> val;
+                if(q.front() -> left != nullptr) q.push(q.front() -> left);
+                if(q.front() -> right != nullptr) q.push(q.front() -> right);
+                q.pop();
+            }
         if(pq.size() < k)
             pq.push(sum);
         else
@@ -33,12 +34,7 @@ public:
                 pq.pop();
             }
         }
-        fn(k);
-        return;
     }
-    long long kthLargestLevelSum(TreeNode* root, int k) {
-        q.push(root);
-        fn(k);
         if(pq.size() < k)   return -1;
         return pq.top();
         
