@@ -23,7 +23,7 @@ public:
             if(q.front() -> right != nullptr) q.push(q.front() -> right);
             q.pop();
         }
-        pq.push(sum);
+        pq.push_back(sum);
         fn();
         return;
     }
@@ -31,12 +31,11 @@ public:
         q.push(root);
         fn();
         if(pq.size() < k)   return -1;
-        for(int i=1 ; i<k ; i++)
-            pq.pop();
-        return pq.top();
+        sort(pq.begin() , pq.end());
+        return pq[pq.size() - k];
         
     }
 private:
-    priority_queue<long long> pq;
+    vector<long long> pq;
     queue<TreeNode*> q;
 };
