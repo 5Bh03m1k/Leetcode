@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void fn()
+    void fn(int k)
     {
         long long n = q.size() , sum = 0;
         if(n == 0)
@@ -23,19 +23,27 @@ public:
             if(q.front() -> right != nullptr) q.push(q.front() -> right);
             q.pop();
         }
-        pq.push_back(sum);
-        fn();
+        if(pq.size() < k)
+            pq.push(sum);
+        else
+        {
+            if(sum > pq.top())  
+            {
+                pq.push(sum);
+                pq.pop();
+            }
+        }
+        fn(k);
         return;
     }
     long long kthLargestLevelSum(TreeNode* root, int k) {
         q.push(root);
-        fn();
+        fn(k);
         if(pq.size() < k)   return -1;
-        sort(pq.begin() , pq.end());
-        return pq[pq.size() - k];
+        return pq.top();
         
     }
 private:
-    vector<long long> pq;
+    priority_queue<long long , vector<long long> , greater<long long>> pq;
     queue<TreeNode*> q;
 };
