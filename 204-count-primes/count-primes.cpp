@@ -13,13 +13,14 @@ public:
             return 1;
         }
         int tmp = 1;
-        for(int j=3 ; j<=n ; j++){
+        for(int j=3 ; j<=n ; j+=2){
             if(arr.size()>tmp){
                 if(arr[tmp] == j)   tmp++;
                 goto stop;
             }
             else{
-                for(int i=0; arr[i]*arr[i] <= j ; i++)
+                    int s = sqrt(j);
+                for(int i=0; arr[i] <=s ; i++)
                 {
                     if(j%arr[i] == 0)   goto stop;
                 }
