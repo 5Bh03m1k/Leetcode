@@ -6,7 +6,7 @@ public:
         int ans=1;
         while(b>0)
         {
-            if(b%2 == 1)    ans*=a,ans%=mod;
+            if(b&1)    ans*=a,ans%=mod;
             b=b>>1;
             a=(a*a)%mod;
         }
