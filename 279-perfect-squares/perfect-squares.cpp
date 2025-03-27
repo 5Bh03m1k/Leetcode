@@ -2,9 +2,9 @@ class Solution {
 public:
     bool is_perfect(int n)
     {
-        int s = sqrt(n);
+        //int s = sqrt(n);
 
-        if(s*s == n)    return true;
+        if(int(sqrt(n))*int(sqrt(n)) == n)    return true;
         return false;
     }
 
