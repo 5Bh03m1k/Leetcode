@@ -13,7 +13,8 @@ public:
         /////////is perfect square == 1////////
         if(is_perfect(n))   return 1;
         /////////n=a^2+b^2///////////
-        for(int i=1 ; i<=sqrt(n/2);i++)
+        int r=sqrt(n/2);
+        for(int i=1 ; i<=r;i++)
         {
             if(is_perfect(n - i*i)) return 2;
         }
