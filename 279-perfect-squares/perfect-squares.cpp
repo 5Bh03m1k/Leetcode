@@ -7,7 +7,7 @@ public:
         if(table.count(n) != 0) return table[n];
         int m = INT_MAX,s=sqrt(n);
         if(s*s == n)    return 1;
-        for(int i=1 ; i*i<n ; i++)
+        for(int i=s ; i*i>=s ; i--)
             m = min(m,numSquares(n-(i*i))+1);
         table[n] = m;
         return m;
