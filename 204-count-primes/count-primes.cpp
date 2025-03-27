@@ -4,8 +4,8 @@ public:
         if(n <= 2)   return 0;
         vector<bool> arr(n , true);       
         n--;
-
-        arr[0] =true;
+        arr[0]=arr[1]=false;
+        arr[2] =true;
         for(int i=2 ; i*i <= n ; i++)
         {
             if(arr[i]){
@@ -20,7 +20,7 @@ public:
         for(auto i:arr){
             if(i) count++;
         }
-        return count-2;
+        return count;
 
     }
 };
