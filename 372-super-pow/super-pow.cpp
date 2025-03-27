@@ -1,14 +1,14 @@
 class Solution {
     int mod =1337;
 public:
-    int power(int a, int b )
+    int power(long long int a, int b )
     {
         int ans=1;
         while(b>0)
         {
             if(b%2 == 1)    ans*=a,ans%=mod;
             b=b>>1;
-            a=((a%mod)*(a%mod))%mod;
+            a=(a*a)%mod;
         }
         return ans;
     }
