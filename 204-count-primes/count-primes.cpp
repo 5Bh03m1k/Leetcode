@@ -1,34 +1,26 @@
-vector<int> arr;
 class Solution {
 public:
     int countPrimes(int n) {
-        if(n == 0)  return 0;
-        ////////////////////////////
+        if(n <= 2)   return 0;
+        vector<bool> arr(n , true);       
         n--;
-        if(n == 1 || n==0) return 0;
-        if(arr.size() == 0)
-            arr.push_back(2);
 
-        if(n == 2) {
-            return 1;
-        }
-        int tmp = 1;
-        for(int j=3 ; j<=n ; j+=2){
-            if(arr.size()>tmp){
-                if(arr[tmp] == j)   tmp++;
-                goto stop;
-            }
-            else{
-                    int s = sqrt(j);
-                for(int i=0; arr[i] <=s ; i++)
+        arr[0] =true;
+        for(int i=2 ; i*i <= n ; i++)
+        {
+            if(arr[i]){
+                for(int j=2*i ; j<= n ; j+=i)
                 {
-                    if(j%arr[i] == 0)   goto stop;
+                    if(arr[j])arr[j]=false;
                 }
-                arr.push_back(j);
-                tmp++;
             }
-            stop:;
+            
         }
-        return tmp;
+        int count=0;
+        for(auto i:arr){
+            if(i) count++;
+        }
+        return count-2;
+
     }
 };
