@@ -5,10 +5,11 @@ public:
         {
             if( n&1 ){
                 if(n == 1)  return true;
-                return false;
+                goto stop;
             }
             n >>= 1;
         }
+        stop:
         return false;
     }
 };
