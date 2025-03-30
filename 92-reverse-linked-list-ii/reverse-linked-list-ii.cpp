@@ -12,20 +12,20 @@ class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         ListNode* tmp = head;
-        stack<int> st;
+        vector<int>st;
         for(int i=1 ; i<left ; i++) tmp = tmp->next;
         ListNode* tmp1 = tmp;
         for(int i = left ; i <= right ; i++){    
-            st.push(tmp->val);
+            st.push_back(tmp->val);
             if(tmp != nullptr)
                 tmp = tmp->next;
         }
 
         for(int i = left ; i<=right ; i++)
         {
-            tmp1 -> val = st.top();
+            tmp1 -> val = st.back();
             if(st.size() != 0)
-                st.pop();
+                st.pop_back();
              if(tmp1 != nullptr)
                 tmp1 = tmp1->next;
         }
