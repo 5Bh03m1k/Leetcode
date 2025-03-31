@@ -11,7 +11,7 @@
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        deque<ListNode*> dq;
+        list<ListNode*> dq;
         ListNode* tmp = head;
 
         while(tmp != nullptr){
