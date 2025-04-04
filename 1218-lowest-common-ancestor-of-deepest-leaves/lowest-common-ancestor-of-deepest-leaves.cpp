@@ -55,14 +55,15 @@ public:
        dq.push_back(root);
        leaf();
         if(dq.size() == 1)  return dq.front();
-        while( dq.size() != 1){
-            TreeNode* op = dq.front();
-            dq.pop_front();
-            ca(root , op , dq.front());
-            dq.pop_front();
-            dq.push_back(tmp);
-            cout<<tmp->val<<" ";
-        }
+        // while( dq.size() != 1){
+        //     TreeNode* op = dq.front();
+        //     dq.pop_front();
+        //     ca(root , op , dq.front());
+        //     dq.pop_front();
+        //     dq.push_back(tmp);
+        //     //cout<<tmp->val<<" ";
+        // }
+        ca(root,dq.front(),dq.back());
 
         return tmp;
     }
