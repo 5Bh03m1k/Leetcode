@@ -1,11 +1,11 @@
 class Solution {
 public:
     int mod = 1000000007;
-    long long power(long long a , long long b ){
-        long long ans = 1;
+    int power(int a , long long b ){
+        int ans = 1;
         while( b > 0){
-            if( b%2 == 1)   ans = ( a *(long long) ans) % mod ;
-            a  = ( a * a ) % mod;
+            if( b%2 == 1)   ans = ((long long) a *(long long) ans) % mod ;
+            a  = ((long long) a *(long long) a ) % mod;
             b /= 2;
         }
         return ans;
