@@ -10,14 +10,9 @@ public:
         }
         return true;
     }
-    bool s(vector<vector<char>>&arr )//, int i=0 , int j=0)
+    bool s(vector<vector<char>>&arr)
     {
-       /* if(i == 9 && j==9)  return true;
-        if(i == 9)
-        {
-            i=0;
-            j++;
-        }*/
+       
         for(int i=0 ; i<9 ; i++)
         {
             for(int j=0 ; j<9 ; j++)
@@ -37,10 +32,11 @@ public:
                          
                     }
                    if(arr[i][j] == '.') return false;
-                    l:
+                    
                 }
             }
         }
+        l:
         return true;
     }
     void solveSudoku(vector<vector<char>>& arr) {
