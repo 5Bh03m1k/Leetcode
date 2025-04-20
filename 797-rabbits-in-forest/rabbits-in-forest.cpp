@@ -1,14 +1,12 @@
 class Solution {
 public:
-    int numRabbits(vector<int>& answers) {
+    int numRabbits(vector<int>& arr) {
         unordered_map<int,int> f;
         int sum = 0;
 
-        for(auto i:answers)
-            f[i]++;
+        for(auto i:arr)  f[++i]++;
 
-        for(auto it :f )
-            sum += ((it.second/(it.first+1))  + (it.second%(it.first+1)>0 ? 1 : 0)) * (it.first + 1);
+        for(auto i:f)   sum += i.first*((i.second/i.first) + ((i.second % i.first) == 0? 0 : 1));
 
         return sum;
     }
