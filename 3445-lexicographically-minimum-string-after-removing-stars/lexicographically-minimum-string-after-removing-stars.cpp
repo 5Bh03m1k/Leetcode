@@ -2,7 +2,7 @@ class Solution {
 public:
     string clearStars(string s) {
         priority_queue<char , vector<char> , greater<char> > pq;
-        unordered_map<char , vector<int>> table;
+        vector<vector<int>> table(26);
         vector<bool> st(s.size(),false);
 
         for(int i = 0 ; i < s.size() ; i++)
@@ -10,12 +10,12 @@ public:
             if(s[i] != '*')
             {
                 pq.push(s[i]);
-                table[s[i]].push_back(i);
+                table[s[i] - 'a'].push_back(i);
             }
             
             else{
-                st[table[pq.top()].back()] = true;
-                table[pq.top()].pop_back();
+                st[table[pq.top() - 'a'].back()] = true;
+                table[pq.top() - 'a'].pop_back();
                 pq.pop();
             }
         }
