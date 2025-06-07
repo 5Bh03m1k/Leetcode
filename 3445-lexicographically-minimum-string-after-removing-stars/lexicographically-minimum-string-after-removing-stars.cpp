@@ -1,31 +1,37 @@
 class Solution {
 public:
     string clearStars(string s) {
-        map<char, vector<int>> charMap; // sorted by default
-        vector<bool> deleted(s.size(), false);
+        priority_queue<char , vector<char> , greater<char> > pq;
+        unordered_map<char , vector<int>> table;
+        vector<bool> st(s.size(),false);
 
-        for (int i = 0; i < s.size(); ++i) {
-            if (s[i] != '*') {
-                charMap[s[i]].push_back(i);
-            } else {
-                // Remove index of smallest character
-                auto it = charMap.begin();
-                int idx = it->second.back();
-                deleted[idx] = true;
-                it->second.pop_back();
-                if (it->second.empty()) {
-                    charMap.erase(it);
-                }
+        for(int i = 0 ; i < s.size() ; i++)
+        {
+            if(s[i] != '*')
+            {
+                pq.push(s[i]);
+                table[s[i]].push_back(i);
+            }
+            
+            else{
+                st[table[pq.top()].back()] = true;
+                table[pq.top()].pop_back();
+                pq.pop();
             }
         }
+        
+        string ans = "";
 
-        string result;
-        for (int i = 0; i < s.size(); ++i) {
-            if (s[i] != '*' && !deleted[i]) {
-                result += s[i];
-            }
+        for(int i=0 ; i < s.size() ; i++)
+        {
+            if(st[i] || s[i] == '*')
+                continue;
+            
+             ans.push_back(s[i]);
+            
         }
 
-        return result;
+        return ans;
+
     }
 };
