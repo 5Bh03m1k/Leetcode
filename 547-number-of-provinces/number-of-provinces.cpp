@@ -22,7 +22,7 @@ private:
     }
     vector<bool> v;
 
-    void bfs(vector<vector<int>> ic ,int i)
+    void bfs(vector<vector<int>>&ic ,int i)
     {           
         queue<int> q;
         q.push(i);
@@ -43,10 +43,17 @@ private:
         }
     }
 
-    void dfs(vector<vector<int>>ic , int i ){
+    void dfs(vector<vector<int>>&ic , int i ){
 
+        v[i] = false;
 
-
+        for(auto it : ic[i])
+        {
+            if(v[it])
+            {
+                dfs(ic,it);
+            }
+        }
     }
 
     int count(vector<vector<int>>ic)
@@ -57,7 +64,7 @@ private:
             if(v[i])
             {
                 n++;
-                bfs(ic,i);
+                dfs(ic,i);
             }
         }
 
