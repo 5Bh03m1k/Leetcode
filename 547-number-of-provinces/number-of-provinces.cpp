@@ -65,7 +65,7 @@ private:
             if(v[i])
             {
                 n++;
-                bfs(ic,i,v);
+                dfs(ic,i,v);
             }
         }
 
