@@ -2,9 +2,34 @@ class Solution {
 private:
     vector<bool> v;
 
-    void bfs(vector<vector<int>> arr)
+    int bfs(vector<vector<int>> ic)
     {
+        int num = 0;
+        for(int i = 0 ; i < v.size() ; i++)
+        {
+            if(v[i]){
+                num++;
+                queue<int> q;
+                q.push(i);
+                v[i] = false;
+                while(!q.empty())
+                {
+                    for(int it = 0 ; it < ic[q.front()].size() ; it++)
+                    {
+                        int l = ic[q.front()][it];
+                        if(v[l] == true)
+                        {
+                            q.push(l);
+                            v[l] = false;
+                        }
+                    }
 
+                    q.pop();
+                }
+            }
+        }
+
+        return num;
     }
 public:
     vector<vector<int>> al (vector<vector<int>>& m)
@@ -31,39 +56,9 @@ public:
     int findCircleNum(vector<vector<int>>& ic) {
         ic = al(ic);
         int num = 0;
-        vector<bool> n(ic.size(),true);
+        for(int i = 0 ; i < ic.size() ; i++)
+            v.push_back(true);
 
-        /*for(auto i:ic)
-        {
-            for(auto j:i)
-                cout<<j<<" ";
-            cout<<"\n";
-        }
-        /*////////////////////bfs///////////////////
-        for(int i = 0 ; i < n.size() ; i++)
-        {
-            if(n[i]){
-                num++;
-                queue<int> q;
-                q.push(i);
-                n[i] = false;
-                while(!q.empty())
-                {
-                    for(int it = 0 ; it < ic[q.front()].size() ; it++)
-                    {
-                        int l = ic[q.front()][it];
-                        if(n[l] == true)
-                        {
-                            q.push(l);
-                            n[l] = false;
-                        }
-                    }
-
-                    q.pop();
-                }
-            }
-        }
-        /////////////////////////////////////////*/
-        return num;
+        return bfs(ic);
     }
 };
