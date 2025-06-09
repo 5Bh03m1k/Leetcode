@@ -20,9 +20,10 @@ private:
 
         return l;
     }
+
     vector<bool> v;
 
-    void bfs(vector<vector<int>>&ic ,int i)
+    void bfs(vector<vector<int>>&ic ,int i , vector<bool>&v)
     {           
         queue<int> q;
         q.push(i);
@@ -43,7 +44,7 @@ private:
         }
     }
 
-    void dfs(vector<vector<int>>&ic , int i ){
+    void dfs(vector<vector<int>>&ic , int i , vector<bool>&v){
 
         v[i] = false;
 
@@ -51,12 +52,12 @@ private:
         {
             if(v[it])
             {
-                dfs(ic,it);
+                dfs(ic,it,v);
             }
         }
     }
 
-    int count(vector<vector<int>>ic)
+    int count(vector<vector<int>>&ic, vector<bool>&v)
     {
         int n = 0;
         for(int i = 0 ; i < v.size() ; i++)
@@ -64,7 +65,7 @@ private:
             if(v[i])
             {
                 n++;
-                dfs(ic,i);
+                bfs(ic,i,v);
             }
         }
 
@@ -77,9 +78,8 @@ public:
     int findCircleNum(vector<vector<int>>& ic) {
         ic = adjacency_list(ic);
         int num = 0;
-        for(int i = 0 ; i < ic.size() ; i++)
-            v.push_back(true);
+        vector<bool> v(ic.size(),true);
 
-        return count(ic);
+        return count(ic,v);
     }
 };
