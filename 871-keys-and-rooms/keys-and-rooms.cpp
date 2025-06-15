@@ -1,28 +1,31 @@
 class Solution {
 public:
-    void dfs(vector<vector<int>>&al , vector<bool>&v , int n)
+    void dfs(vector<vector<int>>&al , bool *v , int n)
     {
-        v[n] = false;
+        v[n] = true;
 
         for(auto i:al[n])
         {
-            if(v[i])
+            if(v[i] == false)
             {
-                v[i] = false;
+                v[i] = true;
                 dfs(al,v,i);
                 //cout<<i<<" ";
             }
         }
     }
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        vector<bool> v(rooms.size(),true);
+        bool* v = (bool*)calloc(rooms.size(),sizeof(bool));
+
+        for(int i = 0 ; i < rooms.size() ; i++)
+            cout<<(v[i]?"true":"false")<<" ";
 
         dfs(rooms,v,0);
 
-        for(auto i:v)
-        {
-           if(i)    return false;
-        }
+        for(int i = 0 ; i < rooms.size() ; i++)
+         {
+            if(v[i] == false)    return false;
+         }
 
         return true;
     }
