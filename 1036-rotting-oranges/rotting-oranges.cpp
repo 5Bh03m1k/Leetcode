@@ -3,7 +3,7 @@ public:
     int orangesRotting(vector<vector<int>>& g) {
         queue<pair<int,int>> q;
 
-        int time = 0, count = 0;
+        int count = 0;
 
         for(int i = 0 ; i < g.size() ; i++)
         {
@@ -36,10 +36,8 @@ public:
             }
             x++;
         }
-        cout<<cnt<<" ";
-        time = max(time,x);
-
-        
-        return count == cnt?time:-1;
+        if(count == 0)  return 0;
+        //cout<<count;
+        return count == cnt?x:-1;
     }
 };
