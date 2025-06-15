@@ -32,7 +32,7 @@ public:
         for(auto i:g)
         {
             for(auto j:i)
-                 c += j;
+                 c += j ? 1 : 0;
         }
         return c ;
     }
