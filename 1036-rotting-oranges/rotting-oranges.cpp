@@ -3,7 +3,7 @@ public:
     int orangesRotting(vector<vector<int>>& g) {
         queue<pair<int,int>> q;
 
-        int time = 0;
+        int time = 0, count = 0;
 
         for(int i = 0 ; i < g.size() ; i++)
         {
@@ -12,12 +12,14 @@ public:
                 if(g[i][j] == 2)
                 {  
                     q.push({i,j});
-                    
+                    count++;
                 }
+                if(g[i][j] == 1)
+                    count++;
             }
         }
 
-        int x = -1;
+        int x = -1 , cnt = 0;
         while(q.size())
         {
             int sze = q.size();
@@ -30,20 +32,14 @@ public:
             if(b+1 < g[0].size() && g[a][b+1] == 1) g[a][b+1] = 2,q.push({a,b+1});
 
             q.pop();
+            cnt++;
             }
             x++;
         }
-        //cout<<x<<" ";
+        cout<<cnt<<" ";
         time = max(time,x);
+
         
-        for(auto i:g)
-        {
-            for(auto j:i)
-            {
-                if(j == 1)
-                    return -1;
-            }
-        }
-        return time;
+        return count == cnt?time:-1;
     }
 };
