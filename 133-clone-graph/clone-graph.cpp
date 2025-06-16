@@ -26,8 +26,8 @@ private:
     {
         if(node == nullptr) return nullptr;
 
-        Node* n = new Node;
-        n->val = node->val;
+        Node* n = new Node(node->val);
+        
         table[node] = n;
 
         for(auto i:node->neighbors)
