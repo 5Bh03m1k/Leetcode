@@ -2,10 +2,15 @@ class Solution {
 public:
     int maximumDifference(vector<int>& nums) {
         int t = -1;
-        for(int i = 0 ; i < nums.size() ; i++)
+        priority_queue<int> pq;
+        pq.push(nums[nums.size()-1]);
+
+        for(int i = nums.size()-2 ; i > -1 ; i--)
         {
-            for(int j = i+1 ; j < nums.size() ; j++)
-                t = max(t , (nums[i] < nums[j] ? nums[j]-nums[i]:-1));
+            if(pq.top() > nums[i])
+                t = t > pq.top() - nums[i]? t : pq.top() - nums[i];
+
+            pq.push(nums[i]);
         }
 
         return t;
