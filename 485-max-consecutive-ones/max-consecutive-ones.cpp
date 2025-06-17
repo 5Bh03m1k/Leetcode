@@ -7,6 +7,6 @@ public:
         for(auto i : nums)
             cnt = i ? cnt+1 : (m = m > cnt ? m : cnt)*0;
 
-        return max(cnt,m);
+        return m > cnt ? m : cnt;
     }
 };
