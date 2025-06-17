@@ -1,22 +1,20 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        queue<int> qp;
-        queue<int> qn;
+      vector<int> sp;
+      vector<int> sn;
+      vector<int> ans;
 
-        for(auto i:nums)
-            i > 0 ? qp.push(i) : qn.push(i);
-        
-        nums.clear();
+      for(int i = nums.size()-1 ; i >= 0 ; i--)
+        nums[i] > 0 ? sp.push_back(nums[i]) : sn.push_back(nums[i]);
 
-        while(!qp.empty())
+        while(!sp.empty())
         {
-            nums.push_back(qp.front());
-            nums.push_back(qn.front());
-            qp.pop();
-            qn.pop();
+            ans.push_back(sp.back());
+            ans.push_back(sn.back());
+            sp.pop_back();
+            sn.pop_back();
         }
-
-        return nums;
+        return ans;
     }
 };
