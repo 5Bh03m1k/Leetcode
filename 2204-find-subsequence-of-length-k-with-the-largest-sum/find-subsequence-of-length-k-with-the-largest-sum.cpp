@@ -1,23 +1,22 @@
 class Solution {
 public:
     vector<int> maxSubsequence(vector<int>& nums, int k) {
-        unordered_map<int,queue<int>>  ht;
+        /*unordered_map<int,queue<int>>  ht;
 
         for(int i = 0 ; i < nums.size() ; i++)
-            ht[nums[i]].push(i);
+            ht[nums[i]].push(i);*/
         
-        vector<int> a , b;
+        vector<pair<int,int>> a;
+        vector<int> b;
 
-        for(auto i:nums)
-            a.push_back(i);
+        for(int i =0 ; i < nums.size();i++)
+            a.push_back({nums[i],i});
         
-        priority_queue<int> pq(a.begin() , a.end());
+        priority_queue<pair<int,int>> pq(a.begin() , a.end());
 
         while(k)
         {
-            int i = ht[pq.top()].front();
-            ht[pq.top()].pop();
-            b.push_back(i);
+            b.push_back(pq.top().second);
             pq.pop();
             k--;
         }
