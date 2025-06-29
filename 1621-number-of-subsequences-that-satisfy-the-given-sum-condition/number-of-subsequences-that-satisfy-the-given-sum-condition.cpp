@@ -1,12 +1,9 @@
 class Solution {
-private:
-    int mod = 1e9 + 7;
-
-    
-
 public:
     int numSubseq(vector<int>& nums, int target) {
         long long int ans = 0 ,n;
+        int mod = 1e9 + 7;
+
         sort(nums.begin(),nums.end());
 
         for(int i = 0 ; i < nums.size() ; i++)
