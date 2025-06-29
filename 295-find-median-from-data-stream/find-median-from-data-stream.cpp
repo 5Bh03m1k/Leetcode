@@ -1,55 +1,42 @@
 class MedianFinder {
+private:
+    priority_queue<int> maxh;
+    priority_queue<int , vector<int> , greater<int>> minh;
+    int a,b;
 public:
-    priority_queue<int> d;
-    priority_queue<int , vector<int> , greater<int>> u;
-    vector<int> a;
     MedianFinder() {
+
+        
+        
     }
     
-    void addNum(int num) {
-        if( d.size() == 0 && u.size() == 0 && (a.size() == 0 || a.size() == 1))
-        {  
-             switch(a.size())
-            {
-                case 0:{a.push_back(num);  return;}
-                default : {
-                                d.push(min(a[0],num));
-                                u.push(max(a[0],num));
-                                a.clear();
-                                return;
-                            }
+    void addNum(int nums) {
+
+        if(maxh.size() > 0 && nums > maxh.top()) minh.push(nums);
+        else maxh.push(nums);
+
+         a = maxh.size() , b = minh.size();
+
+        if(abs(a-b) > 1 )
+        {
+            if(a > b){
+                minh.push(maxh.top());
+                maxh.pop();
+            }
+
+            else{
+                maxh.push(minh.top());
+                minh.pop();
             }
         }
-
-        int n;
-        if(num > u.top())
-            u.push(num),n=u.top(),u.pop();
-        else if(num < d.top())
-            d.push(num),n=d.top(),d.pop();
-        else    n = num;
-
-        switch(a.size())
-        {
-            case 0:{a.push_back(n);  return;}
-            default : {
-                            d.push(min(a[0],n));
-                            u.push(max(a[0],n));
-                            a.clear();
-                            return;
-                        }
-        }
-
+        
     }
     
     double findMedian() {
-        // double n;
-        switch(a.size())
-        {
-            case 0: return (double)((d.top()+u.top()))/2 ;
-            case 1: return a[0];
-            default : return 0;
-        }
-        return 0;
+
+        if(maxh.size() == minh.size())  return ((double)(maxh.top()+minh.top()))/2;
+        return maxh.size() > minh.size() ? maxh.top() : minh.top();
+        
     }
 };
 
