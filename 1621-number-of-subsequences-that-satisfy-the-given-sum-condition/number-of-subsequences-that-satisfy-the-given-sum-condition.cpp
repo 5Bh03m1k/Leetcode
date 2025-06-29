@@ -20,15 +20,15 @@ public:
 
         for(int i = 0 ; i < nums.size() ; i++)
         {
-            if(target >= 2*nums[i])
-            {
+            if(target < 2*nums[i])break;
+            
                  auto it = upper_bound(nums.begin(),nums.end(),target - nums[i]);
                  a = it - nums.begin() - i - 1;
 
                 ans += arr[a];
                 ans %= mod;
 
-            }
+            
             
 
         }
