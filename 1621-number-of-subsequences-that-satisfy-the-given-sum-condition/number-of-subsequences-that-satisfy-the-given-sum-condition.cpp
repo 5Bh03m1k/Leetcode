@@ -5,7 +5,7 @@ private:
 public:
     int numSubseq(vector<int>& nums, int target) {
         long long int ans = 0, a=1 , c=0;
-        vector<int> arr(nums.size(),0);
+        vector<int> arr(nums.size());
         
         for(auto i:nums)
         {
@@ -15,16 +15,22 @@ public:
             c++;
         }
 
-        if(is_sorted(nums.begin(),nums.end()) == false);
+       if(is_sorted(nums.begin(),nums.end()) == false);
         sort(nums.begin(),nums.end());
 
-        for(int i = 0 ; i <nums.size() && target >= 2*nums[i] ; i++)
+        for(int i = 0 ; i < nums.size() ; i++)
         {
+            if(target >= 2*nums[i])
+            {
                  auto it = upper_bound(nums.begin(),nums.end(),target - nums[i]);
                  a = it - nums.begin() - i - 1;
 
                 ans += arr[a];
                 ans %= mod;
+
+            }
+            
+
         }
         
 
