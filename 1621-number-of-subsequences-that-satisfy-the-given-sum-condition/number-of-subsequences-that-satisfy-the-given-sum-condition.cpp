@@ -1,8 +1,34 @@
 class Solution {
+private:
+    int mod = 1e9 + 7;
+
+    int po2(int n)
+    {
+        long int ans = 1,b = 2;
+
+        while( n > 0 )
+        {
+            if(n%2 )
+                ans *= b , ans %= mod;
+            b *= b;
+            b %= mod;
+            n /= 2;
+        }
+
+        return ans;
+    }
+
 public:
     int numSubseq(vector<int>& nums, int target) {
-        long long int ans = 0 ,n;
-        int mod = 1e9 + 7;
+        long long int ans = 0, a=1;
+        vector<int> po2;
+        
+        for(auto i:nums)
+        {
+            po2.push_back(a);
+            a = a<<1;
+            a %= mod;
+        }
 
         sort(nums.begin(),nums.end());
 
@@ -11,19 +37,9 @@ public:
             if(target >= 2*nums[i])
             {
                  auto it = upper_bound(nums.begin(),nums.end(),target - nums[i]);
-                 n = it - nums.begin() - i - 1;
-                long int aws = 1,b = 2;
+                 a = it - nums.begin() - i - 1;
 
-                while( n > 0 )
-                {
-                    if(n%2 )
-                        aws *= b , aws %= mod;
-                    b *= b;
-                    b %= mod;
-                    n /= 2;
-                }
-
-                ans += aws;
+                ans += po2[a];
                 ans %= mod;
 
             }
