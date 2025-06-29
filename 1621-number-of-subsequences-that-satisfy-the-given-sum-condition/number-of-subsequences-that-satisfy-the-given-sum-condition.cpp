@@ -17,19 +17,13 @@ public:
 
         sort(nums.begin(),nums.end());
 
-        for(int i = 0 ; i < nums.size() ; i++)
+        for(int i = 0 ; i <nums.size() && target >= 2*nums[i] ; i++)
         {
-            if(target >= 2*nums[i])
-            {
                  auto it = upper_bound(nums.begin(),nums.end(),target - nums[i]);
                  a = it - nums.begin() - i - 1;
 
                 ans += arr[a];
                 ans %= mod;
-
-            }
-            
-
         }
         
 
