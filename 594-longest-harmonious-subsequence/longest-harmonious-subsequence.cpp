@@ -9,9 +9,9 @@ public:
 
         for(auto it = table.begin() ; it != table.end() ; it++)
         {
-            if(table.find(it->first + 1) == table.end())
+            if(!table.count(it->first + 1) )
             {
-                if(table.find(it->first - 1) == table.end())
+                if(!table.count(it->first - 1) )
                     continue;
                 
                 else
@@ -19,7 +19,7 @@ public:
             }
 
             else{
-                if(table.find(it->first - 1) == table.end())
+                if(!table.count(it->first - 1) )
                     tmp = table[it-> first + 1];
 
                 else
