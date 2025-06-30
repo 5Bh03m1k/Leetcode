@@ -1,53 +1,34 @@
 class Solution {
 public:
-    int nearestExit(vector<vector<char>>& arr, vector<int>& e) {
-        int a = arr.size(),b = arr[0].size();
-        queue<pair<int,int>> q;
-        bool flag = false;
-        int c = 1 , n , x , y;
+    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
+        int rows = maze.size(), cols = maze[0].size();
+        queue<pair<int, int>> q;
+        q.push({entrance[0], entrance[1]});
+        maze[entrance[0]][entrance[1]] = '+';  // mark as visited
 
-        q.push({e[0],e[1]});
-        //arr[e[0]][e[1]] = '+';
-        
-        
+        int steps = 0;
+        vector<pair<int, int>> dirs = {{-1,0}, {1,0}, {0,-1}, {0,1}};  // 4 directions
 
-        while(!q.empty())
-        {
-            n = q.size();
-            
-            for(int i = 0 ; i < n ; i++)
-            {
-                x = q.front().first , y = q.front().second;
-                //cout<<x<<" "<<y<<endl;
-                arr[x][y] = '+';
+        while (!q.empty()) {
+            int n = q.size();
+            steps++;
 
-                if(x-1 >= 0 && arr[x-1][y] == '.')
-                {
-                    
-                    if( x-1 == 0 || y == 0 || y == arr[0].size()-1)  return c;
-                    arr[x-1][y] = '+';
-                    q.push({x-1,y});
-                }
-                    
-                if(x+1 < arr.size()  && arr[x+1][y] == '.'){
-                    if( x+1 == arr.size()-1 || y == 0 || y == arr[0].size()-1)  return c;
-                    arr[x+1][y] = '+';
-                    q.push({x+1,y});
-                }
-                if(y +1  < arr[0].size() && arr[x][y+1] == '.'){
-                    if( y+1 == arr[0].size()-1 || x == 0 || x == arr.size()-1)  return c;
-                    arr[x][y+1] = '+';
-                    q.push({x,y+1});
-                }
-                if(y-1 >= 0 &&  arr[x][y-1] == '.'){
-                    if( y-1 == 0 || x == 0 || x == arr.size()-1)  return c;
-                    arr[x][y-1] = '+';
-                    q.push({x,y-1});
-                }
+            for (int i = 0; i < n; i++) {
+                auto [x, y] = q.front();
                 q.pop();
-            }
 
-            c++;
+                for (auto& [dx, dy] : dirs) {
+                    int nx = x + dx, ny = y + dy;
+
+                    if (nx >= 0 && nx < rows && ny >= 0 && ny < cols && maze[nx][ny] == '.') {
+                        if (nx == 0 || ny == 0 || nx == rows - 1 || ny == cols - 1) {
+                                return steps;
+                        }
+                        maze[nx][ny] = '+';  // mark visited
+                        q.push({nx, ny});
+                    }
+                }
+            }
         }
 
         return -1;
