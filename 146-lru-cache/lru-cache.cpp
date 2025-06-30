@@ -2,10 +2,14 @@ class LRUCache {
 private:
     unordered_map<int,_List_iterator<std::pair<int, int>>> table;
     list<pair<int,int>> ll;
-    pair<int,int> p;
     int size;
 
-    
+    void swap_front(_List_iterator<std::pair<int, int>> it)
+    {
+        ll.push_front({it->first,it->second});
+        table[it->first] = ll.begin();
+        ll.erase(it);
+    }
 public:
     LRUCache(int c) {
         size = c;
@@ -13,23 +17,19 @@ public:
     
     int get(int key) {
         if(table.find(key) == table.end())  return -1;
-        
-        p = *table[key];
+    
+        swap_front(table[key]);
 
-        ll.erase(table[key]);
-        ll.push_front(p);
-        table[key] = ll.begin();
-        return p.second;
+        return table[key]->second;
     }
     
     void put(int key, int value) {
         if(table.find(key) != table.end())
         {
             table[key]->second = value;
-            p=*table[key];
-            ll.erase(table[key]);
-            ll.push_front(p);
-            table[key] = ll.begin();
+
+            swap_front(table[key]);
+           
             return;
         }
         ll.push_front({key,value});
