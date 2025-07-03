@@ -15,17 +15,12 @@ public:
 
         for(int i = arr.size() - 1 ; i >= 0 ; i--)
         {
-            n += arr[i];
+            n += (arr[i])%26;
             n%=26;
-            arr[i] = n;
+             s[i] = shift(s[i] , n);
+            
         }
         
-        for(int i = 0 ; i < s.size() ; i++)
-        {
-            s[i] = shift(s[i] , arr[i]);
-        }
-
-
         return s;
     }
 };
