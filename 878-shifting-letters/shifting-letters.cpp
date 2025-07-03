@@ -11,16 +11,12 @@ private:
 public:
     string shiftingLetters(string s, vector<int>& arr) {
 
-        int n = 0;
-
-        for(int i = 0 ; i < arr.size() ; i++)
-            arr[i] %= 26;
+        long long int n = 0;
 
         for(int i = arr.size() - 1 ; i >= 0 ; i--)
         {
-            // arr[i]%=26
             n += arr[i];
-
+            n%=26;
             arr[i] = n;
         }
         
