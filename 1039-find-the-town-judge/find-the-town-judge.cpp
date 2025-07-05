@@ -1,6 +1,4 @@
 class Solution {
-private:
-    // void trust_list(i)
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
 
