@@ -2,17 +2,15 @@ class Solution {
 public:
     int findLucky(vector<int>& arr) {
         unordered_map<int,int> table;
+        int x = -1;
 
         for(auto i:arr)
             table[i]++;
 
-        sort(arr.begin(),arr.end());
+        for(auto it:table)
+            x = it.first == it.second ? (x > it.first ? x : it.first):x;
 
-        for(int i = arr.size() -1 ; i >= 0 ; i--)
-        {
-            if(table[arr[i]] == arr[i]) return arr[i];
-        } 
-
-        return -1;
+        return x;
+        
     }
 };
