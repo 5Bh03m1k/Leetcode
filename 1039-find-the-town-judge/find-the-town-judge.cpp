@@ -4,7 +4,7 @@ private:
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
 
-        vector<pair<int,int>> t(n);
+        vector<pair<int,int>> t(n+1,{0,0});
 
         for(auto i:trust)
         {
