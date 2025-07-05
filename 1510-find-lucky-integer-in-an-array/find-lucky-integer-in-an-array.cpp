@@ -1,14 +1,14 @@
 class Solution {
 public:
     int findLucky(vector<int>& arr) {
-        unordered_map<int,int> table;
+        vector<int>table(501,0);
         int x = -1;
 
         for(auto i:arr)
             table[i]++;
 
-        for(auto it:table)
-            x = it.first == it.second ? (x > it.first ? x : it.first):x;
+        for(auto it:arr)
+            x = table[it] == it && it > x? it : x;
 
         return x;
         
