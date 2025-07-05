@@ -4,18 +4,17 @@ private:
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
 
-        vector<pair<int,int>> t(n+1,{0,0});
+        vector<int> t(n+1,0);
 
         for(auto i:trust)
         {
-            t[i[0]-1].first++;
-            t[i[1]-1].second++;
+            t[i[0]]--;
+            t[i[1]]++;
         } 
-        int c = 1;
-        for(auto i:t)
+        
+        for(int i=1 ; i <= n ; i++)
         {
-            if(i.first == 0 && i.second == n-1)    return c;
-            c++;
+            if(t[i] == n-1)   return i;
         }
 
         return -1;
