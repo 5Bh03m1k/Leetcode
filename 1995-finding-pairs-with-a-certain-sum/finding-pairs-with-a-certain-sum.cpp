@@ -1,14 +1,15 @@
 class FindSumPairs {
+private:
 unordered_map<int,int>  table;
 vector<int> arr;
 vector<int> arr1;
 public:
     FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
         arr = nums1;
-        arr1 = nums2;
+       //arr1 = &nums2;
 
         for(auto i:nums2)
-            table[i]++;
+            arr1.push_back(i),table[i]++;
         
     }
     
