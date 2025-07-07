@@ -6,9 +6,9 @@ private:
         vis.set(n);
 
 
-        for(auto i : a[n])
+        for(int i = 0 ; i < a[n].size() ; i++)
         {
-            if(ic.test(i) && dfs(a,i,vis,ic) == false)   return false;
+            if(ic.test(a[n][i]) && dfs(a,a[n][i],vis,ic) == false)   return false;
         }
         ic.reset(n);
         vis.reset(n);
@@ -22,8 +22,8 @@ public:
         bitset<2000> ic;
         ic.set();
     
-        for(auto i:p)
-            al[i[1]].push_back(i[0]);
+        for(int i = 0 ; i < p.size() ; i++)
+            al[p[i][1]].push_back(p[i][0]);
 
         int c = 0;
 
