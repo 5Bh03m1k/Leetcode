@@ -4,8 +4,8 @@ public:
         vector<bool> a(n,true);
         vector<int> ans;
 
-        for(auto i:edges)
-            a[i[1]] = false;
+        for(int i = 0 ; i < edges.size() ; i++)
+            a[edges[i][1]] = false;
         
         for(int i=0 ; i<n ; i++)
         {
