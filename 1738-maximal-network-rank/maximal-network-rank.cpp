@@ -45,6 +45,7 @@ public:
         {
             for(int j = i+1 ; j < n ; j++)
             {
+                if(r[i].first != kkk)   return m;
                 int tmp =r[i].first + r[j].first ;
                 
                 tmp = al[r[i].second].find(r[j].second) ? tmp-1:tmp;
