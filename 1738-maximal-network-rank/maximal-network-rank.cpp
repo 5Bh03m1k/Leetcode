@@ -49,7 +49,7 @@ public:
                 
                 tmp = al[r[i].second].find(r[j].second) ? tmp-1:tmp;
                 
-                if(m > tmp) continue;
+                if(m > tmp) break;
                 m = tmp;
             }
         }
