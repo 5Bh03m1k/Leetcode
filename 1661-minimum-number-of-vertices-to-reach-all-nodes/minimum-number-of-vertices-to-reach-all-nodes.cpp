@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
-        bool* a = (bool*)calloc(n,sizeof(int));
+        vector<int> a(n,0);
         vector<int> ans;
 
         for(int i = 0 ; i < edges.size() ; i++)
