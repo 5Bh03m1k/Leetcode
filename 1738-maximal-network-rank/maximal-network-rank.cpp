@@ -26,14 +26,14 @@ public:
         vector<int>sr(n);
         vector<h_table> al(n);
 
-        for(auto i:roads)
+        for(int i = 0 ; i < roads.size() ; i++)
         {
-            al[i[0]].insert(i[1]);
-            al[i[1]].insert(i[0]);
-            r[i[1]].first++;
-            r[i[1]].second = i[1];
-            r[i[0]].first++;
-            r[i[0]].second = i[0];
+            al[roads[i][0]].insert(roads[i][1]);
+            al[roads[i][1]].insert(roads[i][0]);
+            r[roads[i][1]].first++;
+            r[roads[i][1]].second = roads[i][1];
+            r[roads[i][0]].first++;
+            r[roads[i][0]].second = roads[i][0];
         }
 
         int m = -1;
@@ -56,7 +56,5 @@ public:
         }
 
         return m;
-
-        //return m;
     }
 };
