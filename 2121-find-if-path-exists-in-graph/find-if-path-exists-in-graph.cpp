@@ -8,9 +8,9 @@ bool dfs(int n , vector<vector<int>> &a , int d , vector<bool> &vis)
     vis[n] = true;
     bool flag  = false;
 
-    for(auto i:a[n]){
-        if(vis[i] == false)
-            flag |= dfs(i,a,d,vis);
+    for(int i = 0 ; i < a[n].size() ; i++){
+        if(vis[a[n][i]] == false)
+            flag |= dfs(a[n][i],a,d,vis);
     }
 
     return flag;
@@ -21,10 +21,10 @@ public:
         vector<vector<int>> aj(n);
         vector<bool> vis(n,false);
 
-        for(auto i:edges)
+        for(int i = 0 ; i < edges.size() ; i ++)
         {
-            aj[i[0]].push_back(i[1]);
-            aj[i[1]].push_back(i[0]);
+            aj[edges[i][0]].push_back(edges[i][1]);
+            aj[edges[i][1]].push_back(edges[i][0]);
         }
 
         return dfs(source , aj , de , vis);
