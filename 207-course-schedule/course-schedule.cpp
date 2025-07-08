@@ -1,38 +1,38 @@
 class Solution {
-private:
-    bool dfs(vector<vector<int>>&a , int n,vector<bool>&vis , vector<bool>&ic)
-    {
-        if(vis[n]) return false;
-        vis[n] = true;
-
-
-        for(auto i : a[n])
-        {
-            if(ic[i] == true && dfs(a,i,vis,ic) == false)   return false;
-        }
-        ic[n] = false;
-        vis[n] = false;
-        return true;
-    }
 public:
-    bool canFinish(int s, vector<vector<int>>& p) {
-        
-        vector<vector<int>> al(s);
-        vector<bool> vis(s,false);
-        vector<bool> ic(s,true); //is_cycle_present ic()
-    
+    bool canFinish(int n, vector<vector<int>>& p) {
+        vector<int> in(n,0);
+        vector<vector<int>> al(n);
+
         for(auto i:p)
-            al[i[1]].push_back(i[0]);
-
-        int c = 0;
-
-        for(int i=0 ;i < s ;i++)
         {
-            if(ic[i] && dfs(al,i,vis,ic) == false)  return false;
-         
+            al[i[1]].push_back(i[0]);
+            in[i[0]]++;
         }
 
-        return true;
-        
+        queue<int> q;
+        int cnt = 0;
+
+        for(int i = 0 ; i < n ; i++)
+        {
+            if(in[i] == 0)  q.push(i);
+        }
+
+        while(!q.empty())
+        {
+            int x = q.front();
+            cnt++;
+
+            for(auto i:al[x])
+            {
+                in[i]--;
+
+                if(in[i] == 0)  q.push(i);
+            }
+
+            q.pop();
+        }
+
+        return (cnt == n);
     }
 };
