@@ -27,10 +27,10 @@ private:
 
     void list(vector<vector<int>> &al , vector<vector<int>> &e)
     {
-        for(auto i:e)
+        for(int i = 0 ; i < e.size() ; i++)
         {
-            al[i[0]-1].push_back(i[1]-1);
-            al[i[1]-1].push_back(i[0]-1);
+            al[e[i][0]-1].push_back(e[i][1]-1);
+            al[e[i][1]-1].push_back(e[i][0]-1);
         }
         return;
     }
