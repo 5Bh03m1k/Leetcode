@@ -10,7 +10,7 @@ public:
         {
             out[i] = al[i].size();
 
-            for(auto j:al[i])
+            for(auto& j:al[i])
             {
                 al_new[j].push_back(i);
             }
@@ -29,7 +29,7 @@ public:
             int k = q.front();
             topo.push_back(k);
 
-            for(auto i:al_new[k])
+            for(auto& i:al_new[k])
             {
                 out[i]--;
                 if(out[i] == 0) q.push(i);
@@ -39,7 +39,7 @@ public:
         }
 
         sort(topo.begin(),topo.end());
-        
+
         return topo;
 
 
