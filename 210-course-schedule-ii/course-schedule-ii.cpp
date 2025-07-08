@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> findOrder(int n, vector<vector<int>>& p) {
+        //////kahn s algo//////
         vector<vector<int>> al(n);
         vector<int> in(n,0);
 
