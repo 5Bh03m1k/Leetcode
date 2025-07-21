@@ -1,36 +1,31 @@
 class Solution {
 public:
     string makeFancyString(string s) {
-        deque<char> dq;
         unordered_map<char ,int> table;
+        int tmp = 0;
         string sh = "";
 
         if(s.size() < 3) return s;
 
         for(int i = 0 ; i < 3 ; i++)
-        {
-            dq.push_back(s[i]);
             table[s[i]]++;
-        }
+        
 
         for(int i = 3 ; i < s.size() ; i++)
         {
-            if(table[dq.front()] < 3)
-                sh += dq.front();
-
-            dq.push_back(s[i]);
+            tmp = i-3;
+            if(table[s[tmp]] < 3)
+                sh += s[tmp];
             table[s[i]]++;
-
-            table[dq.front()]--;
-            dq.pop_front(); 
+            table[s[tmp]]--;
         }
-
-        while(!dq.empty())
+        tmp = s.size() - 3;
+        while(tmp < s.size())
         {
-            if(table[dq.front()] < 3)
-                sh += dq.front();
-            table[dq.front()]--;
-            dq.pop_front();
+            if(table[s[tmp]] < 3)
+                sh += s[tmp];
+            table[s[tmp]]--;
+            tmp ++;
         }
 
         return sh;
