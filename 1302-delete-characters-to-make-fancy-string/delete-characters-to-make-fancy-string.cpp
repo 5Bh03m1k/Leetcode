@@ -1,32 +1,15 @@
 class Solution {
 public:
     string makeFancyString(string s) {
-        int table[26]={0};
-        int tmp = 0;
+        if(s.size() < 3)    return s;
         string sh = "";
-
-        if(s.size() < 3) return s;
-
-        for(int i = 0 ; i < 3 ; i++)
-            table[s[i] -'a']++;
-        
-
-        for(int i = 3 ; i < s.size() ; i++)
+        for(int i = 0 ; i < s.size()-2 ; i++)
         {
-            tmp = i-3;
-            if(table[s[tmp]-'a'] < 3)
-                sh += s[tmp];
-            table[s[i]-'a']++;
-            table[s[tmp]-'a']--;
+            if(s[i] != s[i+1] || s[i+2] != s[i])    sh+=s[i];
         }
-        tmp = s.size() - 3;
-        while(tmp < s.size())
-        {
-            if(table[s[tmp]-'a'] < 3)
-                sh += s[tmp];
-            table[s[tmp]-'a']--;
-            tmp ++;
-        }
+
+        sh += s[s.size()-2];
+        sh += s[s.size()-1];
 
         return sh;
     }
