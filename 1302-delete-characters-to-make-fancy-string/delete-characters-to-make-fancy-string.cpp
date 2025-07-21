@@ -1,7 +1,7 @@
 class Solution {
 public:
     string makeFancyString(string s) {
-        vector<int> table(26,0);
+        int table[26]={0};
         int tmp = 0;
         string sh = "";
 
