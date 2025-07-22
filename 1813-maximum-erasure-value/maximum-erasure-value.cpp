@@ -1,23 +1,22 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        queue<int> dq;
+        int p1=0;
         unordered_set<int> table;
         int sum = 0;
         int max = 0;
 
-        for(auto i:nums)
+        for(int i = 0 ; i < nums.size() ; i++)
         {
-            while(table.find(i) != table.end())
+            while(table.find(nums[i]) != table.end())
             {
-                table.erase(dq.front());
-                sum -= dq.front();
-                dq.pop();
+                table.erase(nums[p1]);
+                sum -= nums[p1];
+                p1++;
             }
 
-            dq.push(i);
-            table.insert(i);
-            sum += i;
+            table.insert(nums[i]);
+            sum += nums[i];
             max = max > sum ? max :sum;
         }
 
