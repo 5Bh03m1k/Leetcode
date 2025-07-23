@@ -32,20 +32,20 @@ class p{
         void graph(int n , vector<vector<int>>&arr)
         {
             vector<vector<int>> al(n);
-            vector<int> in(n,0);
+            //vector<int> in(n,0);
             vector<bool> vis(n,false);
 
             for(auto& i:arr)
             {
                 al[i[0]].push_back(i[1]);
-                in[i[1]]++;
+               // in[i[1]]++;
             }
 
             int c = 0;
 
-            for(auto& i:in)
+            while(c < n)
             {
-                if( i == 0 ) dfs(al,vis,c);
+                 dfs(al,vis,c);
                 c++;
             }
 
