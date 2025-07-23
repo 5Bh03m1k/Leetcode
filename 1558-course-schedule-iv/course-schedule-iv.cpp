@@ -54,7 +54,7 @@ class p{
 
         bool query(int a , int b)
         {
-            return hash[a][b];
+            return hash[a].test(b);
         }
 
     };
