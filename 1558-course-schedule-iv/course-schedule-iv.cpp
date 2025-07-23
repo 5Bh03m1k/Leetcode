@@ -1,9 +1,9 @@
 class p{
-        vector<vector<bool>> hash;
+        vector<bitset<101>> hash;
     public:
         p(int n)
         {
-            vector<vector<bool>> Hmap(n,vector<bool>(n,false));
+            vector<bitset<101>> Hmap(n);
             hash = Hmap;
         }
 
@@ -15,13 +15,13 @@ class p{
 
             for(auto& i:al[n])
             {
-                hash[n][i] = true;
+                hash[n].set(i);
                 dfs(al,vis,i);
 
                 for(int it = 0 ; it < hash[i].size() ; it++)
                 {
-                    if(hash[i][it])
-                        hash[n][it] = true;
+                    if(hash[i].test(it))
+                        hash[n].set(it);
                 }
                 
             }
@@ -64,7 +64,6 @@ public:
 
         p it(nu);
         it.graph(nu,ps);
-        //it.show();
 
         vector<bool> arr;
 
