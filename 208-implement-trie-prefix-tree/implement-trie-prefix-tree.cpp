@@ -1,5 +1,4 @@
-class t_ll{
-public:
+struct t_ll{
     t_ll* arr[26] = {nullptr};  
     bool flag = false;
 };
