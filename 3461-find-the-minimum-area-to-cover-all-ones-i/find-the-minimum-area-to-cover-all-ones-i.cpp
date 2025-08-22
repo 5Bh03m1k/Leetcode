@@ -15,7 +15,7 @@ public:
                 }
             }
         }
-        cout<<hi[0]<<lo[0]<<hi[1]<<lo[1];
+        //cout<<hi[0]<<lo[0]<<hi[1]<<lo[1];
         return (hi[0]-lo[0])*(hi[1]-lo[1]);
     }
 };
