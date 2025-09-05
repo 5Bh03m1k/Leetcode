@@ -5,20 +5,19 @@ private:
         int c = 0;
         while(n>0)
         {
-            c += n%2;
+            c += n&1;
             n = n >> 1;
         }
 
         return c;
     }
+public:
+    int makeTheIntegerZero(int a, int b) {
+         if(a == 0) return 0;
 
-    int num(int a , int b)
-    {
-        if(a == 0) return 0;
+        long long int n = a , lim = 1ll << 60 , i = 0;
 
-        long long int n = a , lim = 1ll << 60;
-
-        for(int i = 1 ; n >= 0 && n <= lim ; i++)
+        while(++i)
         {
             n -= b;
             if(n <= 0 )  return -1;
@@ -28,10 +27,5 @@ private:
         }
 
         return -1;
-    }
-public:
-    int makeTheIntegerZero(int num1, int num2) {
-        cout<<cnt(43);
-        return num(num1,num2);
     }
 };
