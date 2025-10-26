@@ -13,12 +13,12 @@ public:
     ListNode* swapPairs(ListNode* head) {
         if(head == nullptr || head->next == nullptr )   return head;
 
-        int tmp = head->val;
-        head->val = head->next->val;
-        head->next->val = tmp;
+        ListNode *p = head->next->next;
+        ListNode *q = head->next;
 
-        swapPairs(head->next->next);
-        return head;
+        head->next->next = head;
+        head->next = swapPairs(p);
+        return q;
 
     }
 };
