@@ -1,17 +1,17 @@
 class Solution {
 public:
     vector<int> getSneakyNumbers(vector<int>& nums) {
-        unordered_map<int,int> table;
+        int table[100] = {0};
 
         for(auto& i:nums)
             table[i]++;
 
         nums.clear();
 
-        for(auto&it:table)
+        for(int i = 0 ; i < 100 ; i++)
         {
-            if(it.second == 2)
-                nums.push_back(it.first);
+            if(table[i] == 2)
+                nums.push_back(i);
         }
 
         return nums;
