@@ -1,12 +1,11 @@
 class Solution {
 public:
     int findFinalValue(vector<int>& nums, int n) {
-        unordered_set<int> table;
-
+       bitset<1002> table;
         for(auto& i:nums)
-            table.insert(i);
+            table.set(i);
 
-        while(table.find(n) != table.end())
+        while(n<1001 && table.test(n))
             n = n<<1;
         
         return n;
