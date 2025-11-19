@@ -1,7 +1,7 @@
 class Solution {
 public:
     int findFinalValue(vector<int>& nums, int n) {
-       bitset<1002> table;
+       bitset<1001> table;
         for(auto& i:nums)
             table.set(i);
 
